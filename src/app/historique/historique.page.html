@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Vos commandes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngFor="let plat of historique" class="category-block">
+    <ion-toolbar text-left align-self-center>
+        <ion-row no-padding class="category-banner">
+            <ion-col text-left align-self-center>
+              {{plat.date}} - {{ plat.count }} x {{plat.name}}
+            </ion-col>  
+          </ion-row>
+      
+      <ion-buttons slot="end">
+        <ion-button (click)="plat.like = !plat.like">
+          <ion-icon *ngIf="plat.like" style="font-size:30px;" color="success" name="thumbs-up"></ion-icon>
+          <ion-icon *ngIf="!plat.like" style="font-size:30px;" color="medium" name="thumbs-up"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </div>
+</ion-content>

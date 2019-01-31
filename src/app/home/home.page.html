@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="loged === true">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Accueil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card">
+    <ion-img src="/assets/logoV3.png"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>Bienvenue sur EnKant !</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Nous faisons de notre mieux pour vous proposer un service au top, et pour que vous puissiez manger sereinement
+        ! Jetez un oeil sur nos menus !</p>
+    </ion-card-content>
+    <div *ngIf="loged === false">
+      <form form="userForm" #loginForm="ngForm" (ngSubmit)="login(loginForm)" padding-right>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" name="email" ngModel required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" name="pswd" ngModel required></ion-input>
+        </ion-item>
+        <ion-button expand="full" type="submit">Se connecter</ion-button>
+      </form>
+    </div>
+  </ion-card>
+</ion-content>
+<div *ngIf="loged === true">
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button large (click)="openPannier()">
+          <ion-badge *ngIf="pannier.length > 0"> {{ pannier.length }} </ion-badge>
+          <ion-icon style="font-size:30px;" color="medium" name="cart"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+</div>

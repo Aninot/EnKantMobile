@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Pannier
+    </ion-title>
+    <ion-buttons slot="end">
+        <ion-button>
+          {{user.money}}
+          <ion-icon color="medium" name="logo-euro"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-list>
+    <ion-item *ngFor="let plat of platsPannier" lines ="inset">
+      {{ plat.count }} x {{plat.name}} - {{plat.price }} €
+      <ion-label slot="end" text-right> {{ (plat.price * plat.count) }} € </ion-label>
+      <ion-button slot="end" (click)="supprimerPlatPannier(plat)"> x </ion-button>
+    </ion-item>
+    <ion-item>
+      Total : <span slot="end"> {{ total }} €</span>
+    </ion-item>
+    <ion-button expand="full" (click)="commander()" disabled="{{total == 0}}">Commander !</ion-button>
+  </ion-list>
+</ion-content>
+

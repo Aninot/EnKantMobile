@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Menus
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/informations']">
+        {{user.money}}
+        <ion-icon color="medium" name="logo-euro"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let jour of menu" class="category-block">
+    <ion-row no-padding class="category-banner">
+      <ion-col text-left button tappable (click)="jour.expanded = !jour.expanded" align-self-center>
+        {{jour.day}}
+      </ion-col>
+    </ion-row>
+
+
+    <ion-slides [options]="sliderConfig">
+      <ion-slide *ngFor="let plat of jour.plats">
+        <div *ngIf="jour.expanded">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                {{plat.name}} - {{plat.price}}€
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <img src="./assets/burger.jpg">
+              <div *ngIf="jour.id == this.today">
+                <ion-button expand="full" (click)="addPlatToPannier(plat)">Ajouter</ion-button>
+              </div>
+            </ion-card-content>
+            <ion-row class="cardfooter">
+              <ion-col>
+                <ion-button fill="clear" (click)="plat.expanded = !plat.expanded" text-center>
+                  <ion-icon size="font-size:30px" name="arrow-dropdown"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <div *ngIf="plat.expanded">
+              {{ plat.description }}
+            </div>
+          </ion-card>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button large (click)="openPannier()">
+        <ion-badge *ngIf="pannier.length > 0"> {{ pannier.length }} </ion-badge>
+        <ion-icon style="font-size:30px;" color="medium" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
